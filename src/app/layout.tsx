@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "My Minimal App",
+  title: "connext",
   description: "Next.js minimal setup",
 };
 
@@ -15,7 +15,7 @@ export default function RootLayout({
       <body>
         
         {children}
-        <footer className="p-4 text-center">© 2025 My App</footer>
+
       </body>
     </html>
   );

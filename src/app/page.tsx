@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -8,8 +9,8 @@ export default function Home() {
         <Image
           src="/assets/images/app_logo.png"
           alt="App Logo"
-          width={180}
-          height={48}
+          width={400}
+          height={135}
           className="mb-6"
         />
         <h1 className="text-2xl font-bold mb-2">Admin Dashboard</h1>
@@ -18,11 +19,15 @@ export default function Home() {
         </p>
         <div className="flex space-x-6">
           <button className="bg-white shadow-md rounded-md p-4 w-40 text-left">
-            <p className="text-blue-600 font-semibold mb-1">Company Verification</p>
+            <p className="text-blue-600 font-semibold mb-1">
+              Company Verification
+            </p>
             <p className="text-sm">Review and approve applications</p>
           </button>
           <button className="bg-white shadow-md rounded-md p-4 w-40 text-left">
-            <p className="text-purple-600 font-semibold mb-1">Analytics and Reports</p>
+            <p className="text-purple-600 font-semibold mb-1">
+              Analytics and Reports
+            </p>
             <p className="text-sm">Track platform performance</p>
           </button>
         </div>
@@ -43,7 +48,7 @@ export default function Home() {
                 id="email"
                 type="email"
                 placeholder="johndoe@gmail.com"
-                className="w-full rounded-md p-2 text-black"
+                className="w-full rounded-md p-2 text-black bg-white"
               />
             </div>
             <div>
@@ -54,15 +59,15 @@ export default function Home() {
                 id="password"
                 type="password"
                 placeholder="Enter admin password"
-                className="w-full rounded-md p-2 text-black"
+                className="w-full rounded-md p-2 text-black bg-white"
               />
             </div>
-            <button
-              type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 rounded-md py-2 font-semibold"
+            <Link
+              href="/home"
+              className="w-full bg-blue-600 hover:bg-blue-700 rounded-md py-2 font-semibold text-center block"
             >
               Login
-            </button>
+            </Link>
           </form>
 
           <p className="mt-12 text-center text-sm">© 2025 Copyright</p>
