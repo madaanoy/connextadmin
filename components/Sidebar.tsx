@@ -1,8 +1,19 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
+  const pathname = usePathname();
+
+  const getLinkClass = (href: string) => {
+    return pathname === href
+      ? "flex items-center space-x-3 px-3 py-2 rounded-md bg-[#6C63FF] text-white"
+      : "flex items-center space-x-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-200";
+  };
+
   return (
     <aside className="w-64 h-screen bg-gray-50 border-r border-gray-200 flex flex-col p-6">
       {/* Logo */}
@@ -30,8 +41,8 @@ export default function Sidebar() {
         <ul className="space-y-2 mb-6">
           <li>
             <Link
-              href="/"
-              className="flex items-center space-x-3 px-3 py-2 rounded-md bg-[#6C63FF] text-white"
+              href="/home"
+              className={getLinkClass("/home")}
             >
               <svg
                 className="w-5 h-5"
@@ -54,7 +65,7 @@ export default function Sidebar() {
           <li>
             <Link
               href="/reports"
-              className="flex items-center space-x-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-200"
+              className={getLinkClass("/reports")}
             >
               <svg
                 className="w-5 h-5"
@@ -91,7 +102,7 @@ export default function Sidebar() {
           <li>
             <Link
               href="/settings"
-              className="flex items-center space-x-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-200"
+              className={getLinkClass("/settings")}
             >
               <svg
                 className="w-5 h-5"
@@ -118,8 +129,8 @@ export default function Sidebar() {
           </li>
           <li>
             <Link
-              href="/logout"
-              className="flex items-center space-x-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-200"
+              href="/"
+              className={getLinkClass("/")}
             >
               <svg
                 className="w-5 h-5"
