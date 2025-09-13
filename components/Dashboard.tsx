@@ -15,7 +15,7 @@ import {
   Pin,
   ChevronRight,
 } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 
 const summaryData = [
   {
@@ -44,7 +44,7 @@ const summaryData = [
   },
 ];
 
-const tableData = [
+const initialTableData = [
   {
     email: "jollibee@gmail.com",
     companyName: "Jollibee",
@@ -103,6 +103,14 @@ const statusColors: Record<string, string> = {
 };
 
 export default function Dashboard() {
+  const [tableData, setTableData] = useState(initialTableData);
+
+  const handleStatusChange = (index: number, newStatus: string) => {
+    const updatedData = [...tableData];
+    updatedData[index].verificationStatus = newStatus;
+    setTableData(updatedData);
+  };
+
   return (
     <div className="flex-1 p-8 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold mb-1">Dashboard</h1>
@@ -211,12 +219,23 @@ export default function Dashboard() {
                     {companyAddress}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span
-                      className={`inline-flex items-center px-2 py-1 rounded text-xs font-semibold ${statusColors[verificationStatus]}`}
+                    <select
+                      value={verificationStatus}
+                      onChange={(e) =>
+                        handleStatusChange(index, e.target.value)
+                      }
+                      className={`px-2 py-1 rounded text-xs font-semibold ${
+                        verificationStatus === "Pending"
+                          ? "bg-yellow-200 text-yellow-800"
+                          : verificationStatus === "Verified"
+                          ? "bg-green-200 text-green-800"
+                          : "bg-red-200 text-red-800"
+                      }`}
                     >
-                      {verificationStatus}
-                      <ChevronDown size={14}></ChevronDown>
-                    </span>
+                      <option>Pending</option>
+                      <option>Verified</option>
+                      <option>Not Verified</option>
+                    </select>
                   </td>
 
                   <td className="px-6 py-4 whitespace-nowrap">
