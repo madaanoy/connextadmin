@@ -55,9 +55,9 @@ export default function CompanyDetail({ params }: CompanyDetailProps) {
       {/* Header */}
       <div className="flex items-center space-x-4 mb-6">
         <Link href="/home">
-          <button className="flex items-center space-x-2 bg-white px-4 py-2 rounded shadow hover:bg-gray-100">
-            <ArrowLeft size={16} />
-            <span>Back to Dashboard</span>
+          <button className="flex items-center space-x-2 bg-indigo-600 px-4 py-2 rounded shadow">
+            <ArrowLeft size={16} color={'white'} />
+            <span className="text-white cursor-pointer">Back to Dashboard</span>
           </button>
         </Link>
         <div className="flex items-center space-x-2 bg-blue-100 px-3 py-2 rounded">
