@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { Flag, LogOut, Settings, House } from "lucide-react";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -48,51 +49,13 @@ export default function Sidebar() {
         <ul className="space-y-2 mb-6">
           <li>
             <Link href="/home" className={getLinkClass("/home")}>
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6"
-                />
-              </svg>
+            <House size={16}></House>
               <span>Home</span>
             </Link>
           </li>
           <li>
             <Link href="/reports" className={getLinkClass("/reports")}>
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 17v-6a2 2 0 012-2h6"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13 7h6v6"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 17h6v-6a2 2 0 012-2h6"
-                />
-              </svg>
+            <Flag size={16}></Flag>
               <span>Reports</span>
             </Link>
           </li>
@@ -102,51 +65,13 @@ export default function Sidebar() {
         <ul className="space-y-2">
           <li>
             <Link href="/settings" className={getLinkClass("/settings")}>
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 8v4l3 3"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 2a10 10 0 100 20 10 10 0 000-20z"
-                />
-              </svg>
+            <Settings size={16}></Settings>
               <span>Settings</span>
             </Link>
           </li>
           <li>
             <Link href="/" className={getLinkClass("/")}>
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17 16l4-4m0 0l-4-4m4 4H7"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M7 16v-1a4 4 0 014-4h1"
-                />
-              </svg>
+              <LogOut size={16}></LogOut>
               <span>Logout</span>
             </Link>
           </li>

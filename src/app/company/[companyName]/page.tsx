@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, use } from "react";
+import React, { use, useState } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -9,7 +9,10 @@ import {
   MapPin,
   File,
   Clock,
-  ChevronDown,
+  Calendar,
+  User,
+  MailIcon,
+  Download,
 } from "lucide-react";
 
 const companyData = {
@@ -25,6 +28,8 @@ const companyData = {
       fileSize: "2.4 MB",
       uploadDate: "January 21, 2025",
     },
+    applicationDate: "January 20, 2025",
+    reviewer: "Admin Reviewer",
   },
 };
 
@@ -35,8 +40,10 @@ interface CompanyDetailProps {
 }
 
 export default function CompanyDetail({ params }: CompanyDetailProps) {
+  // ✅ unwrap params with React.use()
   const unwrappedParams = use(params);
-  const companyKey = unwrappedParams.companyName.toLowerCase() as keyof typeof companyData;
+  const companyKey =
+    unwrappedParams.companyName.toLowerCase() as keyof typeof companyData;
   const company = companyData[companyKey];
 
   const [status, setStatus] = useState(company?.verificationStatus || "Pending");
@@ -45,7 +52,11 @@ export default function CompanyDetail({ params }: CompanyDetailProps) {
     return (
       <div className="p-8">
         <p>Company not found.</p>
-        <Link href="/home"><button className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded">Back to Dashboard</button></Link>
+        <Link href="/home">
+          <button className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded">
+            Back to Dashboard
+          </button>
+        </Link>
       </div>
     );
   }
@@ -56,7 +67,7 @@ export default function CompanyDetail({ params }: CompanyDetailProps) {
       <div className="flex items-center space-x-4 mb-6">
         <Link href="/home">
           <button className="flex items-center space-x-2 bg-indigo-600 px-4 py-2 rounded shadow">
-            <ArrowLeft size={16} color={'white'} />
+            <ArrowLeft size={16} color={"white"} />
             <span className="text-white cursor-pointer">Back to Dashboard</span>
           </button>
         </Link>
@@ -65,7 +76,9 @@ export default function CompanyDetail({ params }: CompanyDetailProps) {
         </div>
         <div>
           <h1 className="text-xl font-semibold">{company.companyName}</h1>
-          <p className="text-gray-500 text-sm">Company Details and Information</p>
+          <p className="text-gray-500 text-sm">
+            Company Details and Information
+          </p>
         </div>
         <div className="ml-auto flex items-center space-x-4">
           <select
@@ -83,10 +96,6 @@ export default function CompanyDetail({ params }: CompanyDetailProps) {
             <option>Verified</option>
             <option>Not Verified</option>
           </select>
-          <button className="bg-black text-white px-4 py-2 rounded flex items-center space-x-2 hover:bg-gray-900">
-            <Mail size={16} />
-            <span>Contact Company</span>
-          </button>
         </div>
       </div>
 
@@ -114,7 +123,7 @@ export default function CompanyDetail({ params }: CompanyDetailProps) {
 
               <div className="flex items-center space-x-2">
                 <Mail size={16} className="text-gray-600" />
-                <span className="font-semibold">Email Adress</span>
+                <span className="font-semibold">Email Address</span>
               </div>
               <div className="flex items-center space-x-2">
                 <File size={16} className="text-gray-600" />
@@ -122,7 +131,7 @@ export default function CompanyDetail({ params }: CompanyDetailProps) {
               </div>
 
               <div>{company.email}</div>
-              <div>Food and Beverage</div>
+              <div>{company.industry}</div>
 
               <div className="flex items-center space-x-2">
                 <MapPin size={16} className="text-gray-600" />
@@ -170,13 +179,53 @@ export default function CompanyDetail({ params }: CompanyDetailProps) {
         </div>
 
         {/* Right Column */}
-        <div className="w-80 bg-white rounded-lg p-6 shadow">
-          <h2 className="text-lg font-semibold mb-4 flex items-center space-x-2">
-            <Clock size={20} className="text-yellow-600" />
-            <span>Verification Status</span>
-          </h2>
-          {/* Empty content box */}
-          <div className="h-48 border border-gray-200 rounded"></div>
+        <div className="w-80 space-y-6">
+          {/* Verification Status */}
+          <div className="bg-white rounded-lg p-6 shadow">
+            <h2 className="text-lg font-semibold mb-4 flex items-center space-x-2">
+              <Clock size={20} className="text-yellow-600" />
+              <span>Verification Status</span>
+            </h2>
+            <div className="flex flex-col items-center space-y-4">
+              <div className="bg-yellow-100 rounded-full p-4">
+                <Clock size={32} className="text-yellow-600" />
+              </div>
+              <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                className="bg-yellow-100 text-yellow-800 px-4 py-1 rounded text-sm font-semibold cursor-pointer"
+              >
+                <option>Pending</option>
+                <option>Verified</option>
+                <option>Not Verified</option>
+              </select>
+            </div>
+            <div className="mt-6 border-t border-gray-200 pt-4 text-xs text-gray-600 space-y-2">
+              <div className="flex items-center space-x-2">
+                <Calendar size={16} />
+                <span>Application Date</span>
+              </div>
+              <p className="ml-6">{company.applicationDate}</p>
+              <div className="flex items-center space-x-2 mt-2">
+                <User size={16} />
+                <span>Reviewed by</span>
+              </div>
+              <p className="ml-6">{company.reviewer}</p>
+            </div>
+          </div>
+
+          {/* Quick Actions */}
+          <div className="bg-white rounded-lg p-6 shadow">
+            <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
+            <button className="w-full flex items-center space-x-2 border border-gray-300 rounded px-4 py-2 mb-3 hover:bg-gray-100">
+              <MailIcon size={16} />
+              <span className="text-sm">Send an email</span>
+            </button>
+            <button className="w-full flex items-center space-x-2 border border-gray-300 rounded px-4 py-2 hover:bg-gray-100">
+              <Download size={16} />
+              <span className="text-sm">Download Uploaded Documents</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
